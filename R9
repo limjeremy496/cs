@@ -1,4 +1,4 @@
-function make_optimized_search(A)
+/*function make_optimized_search(A){
     const B = [];
     for(let i = 0; i < array_length(A); i = i + 1){
         B[i] = A[i]; // modify a new array to prevent mutation of the old one
@@ -6,3 +6,81 @@ function make_optimized_search(A)
     
     merge_sort(B);
     return x => binary_search(B, x);
+} 
+function make_search(A){
+    return x => linear_search(A, x);
+}
+
+const my_array = [3,41,20,3,6,16,4];
+make_optimized_search(my_array);*/
+//q1
+
+/*
+function fib(n){
+    const f = [0, 1];
+    
+    for(let i = 2; i <= n; i = i + 1){
+        f[i] = f[i - 1] + f[i - 2];
+    }
+    
+    return f[n];
+}
+
+function fib_1(n){
+    if(n <= 1){
+        return n;
+    }
+    else{
+        let a = 0;
+        let b = 1;
+        
+        for(let i = 2; i <= n; i = i + 1){
+            b = b + a;
+            a = b - a;
+        }
+        return b;
+    }
+}
+display(fib_1(0));
+display(fib_1(6));
+fib_1(4);*/
+//q2
+
+const mem = [];
+
+function read(n, k) {
+    return mem[n] === undefined
+           ? undefined
+           : mem[n][k];
+}
+
+function write(n, k, value) {
+    if (mem[n] === undefined) {
+        mem[n] = [];
+    }
+    mem[n][k] = value;
+}
+
+function mchoose(n, k) {
+    if (read(n, k) !== undefined) {
+        return read(n, k);
+    } else {
+        const result = k > n
+                       ? 0
+                       : k === 0 || k === n// if k choice is 0. 
+                       ? 1 // when k choice equal to n items
+                       : mchoose(n - 1, k) + mchoose(n - 1, k - 1);
+        write(n, k, result);
+        return result;
+    }
+}
+
+mchoose(7, 4); //time complexity is (n-k).2k = (n-k).k = nk - k^2
+//finally it is equal to O(nk);
+// space (n-k).k = O(nk) Size of the table n.k 
+//(run time is usually biggere than space)
+//q3
+
+
+// memoization to store existing calls, such that when it occurs again
+// it will call upon the saved data
