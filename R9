@@ -1,0 +1,8 @@
+function make_optimized_search(A)
+    const B = [];
+    for(let i = 0; i < array_length(A); i = i + 1){
+        B[i] = A[i]; // modify a new array to prevent mutation of the old one
+    }
+    
+    merge_sort(B);
+    return x => binary_search(B, x);
